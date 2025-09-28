@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <boost/multiprecision/cpp_int.hpp>
+#include<iostream>
+#include<boost/multiprecision/cpp_int.hpp>
 
 using boost::multiprecision::uint128_t;
 
