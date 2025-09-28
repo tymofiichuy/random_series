@@ -9,7 +9,7 @@ class lfsr{
 private:
     int length;
 public:
-    virtual bool clock();
+    virtual bool clock() = 0;
 };
 
 class lfsr_32 final:public lfsr{

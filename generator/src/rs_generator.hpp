@@ -2,6 +2,7 @@
 
 #include<iostream>
 #include<string>
+#include<fstream>
 #include "lfsr.hpp"
 
 using namespace std;
@@ -67,16 +68,26 @@ class Wolfram final:public rs_generator{
 private:
     uint32_t seed;
     uint32_t state;
+
+    uint32_t right_c_shift_1();
+    uint32_t left_c_shift_1();
 public:
-    void set_seed(uint32_t seed);
+    void set_seed(uint32_t s);
     uint8_t clock();
+
+    Wolfram(uint32_t s);
 };
 
 class Librarian final:public rs_generator{
 private:
     //file name!
     string seed;
+    ifstream str;
 public:
-    void set_seed(string seed);
+    void set_seed(string s);
+    void init();
+
     uint8_t clock();
+
+    Librarian(string s);
 };
