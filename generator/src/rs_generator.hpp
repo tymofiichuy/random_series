@@ -5,6 +5,9 @@
 #include<fstream>
 #include "lfsr.hpp"
 
+using boost::multiprecision::uint256_t;
+using boost::multiprecision::uint512_t;
+using boost::multiprecision::powm;
 using namespace std;
 
 class rs_generator{
@@ -90,4 +93,33 @@ public:
     uint8_t clock();
 
     Librarian(string s);
+};
+
+class BM_generator final:public rs_generator{
+private:
+    uint256_t seed;
+    uint256_t state;
+
+    uint256_t mod;
+    uint256_t base;
+    uint256_t cmp;
+public:
+    void set_seed(uint256_t s);
+    uint8_t clock();
+
+    BM_generator(uint256_t s);
+};
+
+//0x37682f6947aaab110517c20b76df64781da78b3e87eb58379085d3395793bdb9d9
+class BBS_generator final:public rs_generator{
+private:
+    uint512_t seed;
+    uint512_t state;
+    
+    uint512_t mod;
+public:
+    void set_seed(uint512_t s);
+    uint8_t clock();
+
+    BBS_generator(uint512_t s);
 };
