@@ -15,11 +15,14 @@ class lehmer_32 final:public rs_generator{
 private:
     uint32_t seed_a;
     uint32_t seed_c;
+    uint32_t state;
     bool low = true;
 public:
-    void set_seed(uint32_t a, uint32_t c);
+    void set_seed(uint32_t a, uint32_t c, uint32_t st);
     void change_mode();
     uint8_t clock();
+
+    lehmer_32(uint32_t a, uint32_t c, uint32_t st);
 };
 
 class L20 final:public rs_generator{
@@ -27,8 +30,10 @@ private:
     uint32_t seed;
     lfsr_32 lr;
 public:
-    void set_seed(uint32_t seed);
+    void set_seed(uint32_t s);
     uint8_t clock();
+
+    L20(uint32_t s);
 };
 
 class L89 final:public rs_generator{
@@ -36,18 +41,26 @@ private:
     uint128_t seed;
     lfsr_128 lr;
 public:
-    void set_seed(uint128_t seed);
+    void set_seed(uint128_t s);
     uint8_t clock();
+
+    L89(uint128_t s);
 };
 
 class Geffe final:public rs_generator{
 private:
-    uint32_t seed_r1;
-    uint32_t seed_r2;
-    uint32_t seed_r3;
+    uint32_t seed_r11;
+    uint32_t seed_r9;
+    uint32_t seed_r10;
+
+    lfsr_32 r11;
+    lfsr_32 r9;
+    lfsr_32 r10;
 public:
-    void set_seed(uint32_t r1, uint32_t r2, uint32_t r23);
+    void set_seed(uint32_t s11, uint32_t s9, uint32_t s10);
     uint8_t clock();
+
+    Geffe(uint32_t s11, uint32_t s9, uint32_t s10);
 };
 
 class Wolfram final:public rs_generator{
