@@ -2,11 +2,9 @@
 
 using namespace std;
 
-lehmer_32::lehmer_32(uint32_t a, uint32_t c, uint32_t st):seed_a(a),seed_c(c),state(st){};
+lehmer_32::lehmer_32(uint32_t st):a(0x55555555),c(0x895),state(st){};
 
-void lehmer_32::set_seed(uint32_t a, uint32_t c, uint32_t st){
-    seed_a = a;
-    seed_c = c;
+void lehmer_32::set_seed(uint32_t st){
     state = st;
 }
 
@@ -15,11 +13,11 @@ void lehmer_32::change_mode(){
 }
 
 uint8_t lehmer_32::clock(){
-    state = seed_a*state + seed_c;
+    state = a*state + c;
     if(low){
         return state&0xFF;
     }
     else{
-        return state>>24;
+        return static_cast<uint8_t>(state);
     }
 }

@@ -12,11 +12,11 @@ void Wolfram::set_seed(uint32_t s){
 }
 
 uint32_t Wolfram::right_c_shift_1(){
-    return (state>>1)&(state<<31);
+    return (state>>1)|(state<<31);
 }
 
 uint32_t Wolfram::left_c_shift_1(){
-    return (state<<1)&(state>>31);
+    return (state<<1)|(state>>31);
 }
 
 uint8_t Wolfram::clock(){

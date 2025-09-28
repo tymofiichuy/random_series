@@ -8,25 +8,25 @@
 using boost::multiprecision::uint256_t;
 using boost::multiprecision::uint512_t;
 using boost::multiprecision::powm;
-using namespace std;
+// using namespace std;
 
 class rs_generator{
 public:
-    uint8_t clock();
+    virtual uint8_t clock() = 0;
 };
 
 class lehmer_32 final:public rs_generator{
 private:
-    uint32_t seed_a;
-    uint32_t seed_c;
+    uint32_t a;
+    uint32_t c;
     uint32_t state;
     bool low = true;
 public:
-    void set_seed(uint32_t a, uint32_t c, uint32_t st);
+    void set_seed(uint32_t st);
     void change_mode();
     uint8_t clock();
 
-    lehmer_32(uint32_t a, uint32_t c, uint32_t st);
+    lehmer_32(uint32_t st);
 };
 
 class L20 final:public rs_generator{
@@ -84,15 +84,15 @@ public:
 class Librarian final:public rs_generator{
 private:
     //file name!
-    string seed;
-    ifstream str;
+    std::string seed;
+    std::ifstream str;
 public:
-    void set_seed(string s);
+    void set_seed(std::string s);
     void init();
 
     uint8_t clock();
 
-    Librarian(string s);
+    Librarian(std::string s);
 };
 
 class BM_generator final:public rs_generator{
