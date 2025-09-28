@@ -2,7 +2,7 @@
 
 using namespace std;
 
-lehmer_32::lehmer_32(uint32_t st):a(0x55555555),c(0x895),state(st){};
+lehmer_32::lehmer_32(uint32_t st, bool l):a(0x55555555),c(0x895), low(l),state(st){};
 
 void lehmer_32::set_seed(uint32_t st){
     state = st;
@@ -18,6 +18,6 @@ uint8_t lehmer_32::clock(){
         return state&0xFF;
     }
     else{
-        return static_cast<uint8_t>(state);
+        return state>>24;
     }
 }

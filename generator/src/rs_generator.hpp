@@ -26,7 +26,7 @@ public:
     void change_mode();
     uint8_t clock();
 
-    lehmer_32(uint32_t st);
+    lehmer_32(uint32_t st, bool l);
 };
 
 class L20 final:public rs_generator{

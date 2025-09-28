@@ -8,13 +8,21 @@ void gen_driver::initialize(string type){
     uint256_t seed_256;
     string s_seed;
 
-    if(type == "LE"){
+    if(type == "LE-L"){
         cout << "\nSeed (32-bit number): ";
         if (!(std::cin >> seed_32_1)) {
             throw "Unable to parse\n";
         }
 
-        gen = make_unique<lehmer_32>(seed_32_1);
+        gen = make_unique<lehmer_32>(seed_32_1, false);
+    }
+    else if(type == "LE-H"){
+        cout << "\nSeed (32-bit number): ";
+        if (!(std::cin >> seed_32_1)) {
+            throw "Unable to parse\n";
+        }
+
+        gen = make_unique<lehmer_32>(seed_32_1, true);
     }
     else if(type == "L20"){
         cout << "\nSeed (20-bit number): ";
