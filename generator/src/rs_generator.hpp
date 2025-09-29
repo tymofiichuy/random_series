@@ -85,15 +85,19 @@ public:
 class Librarian final:public rs_generator{
 private:
     //file name!
-    std::string seed;
+    std::string file;
+    uint8_t seed;
+    uint8_t state;
+
     std::ifstream str;
 public:
-    void set_seed(std::string s);
+    void set_file(std::string f);
+    void set_seed(uint8_t s);
     void init();
 
     uint8_t clock();
 
-    Librarian(std::string s);
+    Librarian(std::string f, uint8_t s);
 };
 
 class BM_generator final:public rs_generator{

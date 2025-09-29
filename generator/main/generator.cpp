@@ -58,12 +58,16 @@ void gen_driver::initialize(string type){
         gen = make_unique<Wolfram>(seed_32_1);
     }
     else if(type == "LB"){
-        cout << "\nSeed (file name): ";
+        cout << "\nFile name: ";
         if (!(std::cin >> s_seed)) {
             throw "Unable to parse\n";
         }
+        cout << "\nSeed (8-bit number): ";
+        if (!(std::cin >> seed_32_1)) {
+            throw "Unable to parse\n";
+        }
         
-        gen = make_unique<Librarian>(s_seed);
+        gen = make_unique<Librarian>(s_seed, static_cast<uint8_t>(seed_32_1));
     }
     else if(type == "BM_1-8"){
         cout << "\nSeed (256-bit number): ";
