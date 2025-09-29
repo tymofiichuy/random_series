@@ -65,23 +65,41 @@ void gen_driver::initialize(string type){
         
         gen = make_unique<Librarian>(s_seed);
     }
-    else if(type == "BM"){
+    else if(type == "BM_1-8"){
         cout << "\nSeed (256-bit number): ";
         cin >> s_seed;
         if (!(seed_256 = uint256_t(s_seed))) {
             throw "Unable to parse\n";
         }
         
-        gen = make_unique<BM_generator>(seed_256);
+        gen = make_unique<BM_generator>(seed_256, true);
     }
-    else if(type == "BBS"){
+    else if(type == "BM_8-8"){
         cout << "\nSeed (256-bit number): ";
         cin >> s_seed;
         if (!(seed_256 = uint256_t(s_seed))) {
             throw "Unable to parse\n";
         }
         
-        gen = make_unique<BBS_generator>(seed_256);
+        gen = make_unique<BM_generator>(seed_256, false);
+    }
+    else if(type == "BBS_1-8"){
+        cout << "\nSeed (256-bit number): ";
+        cin >> s_seed;
+        if (!(seed_256 = uint256_t(s_seed))) {
+            throw "Unable to parse\n";
+        }
+        
+        gen = make_unique<BBS_generator>(seed_256, true);
+    }
+    else if(type == "BBS_8-8"){
+        cout << "\nSeed (256-bit number): ";
+        cin >> s_seed;
+        if (!(seed_256 = uint256_t(s_seed))) {
+            throw "Unable to parse\n";
+        }
+        
+        gen = make_unique<BBS_generator>(seed_256, false);
     }
     else{
         throw runtime_error("Undefined type\n");

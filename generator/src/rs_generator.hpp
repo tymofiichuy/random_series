@@ -19,6 +19,7 @@ class lehmer_32 final:public rs_generator{
 private:
     uint32_t a;
     uint32_t c;
+
     uint32_t state;
     bool low = true;
 public:
@@ -99,15 +100,18 @@ class BM_generator final:public rs_generator{
 private:
     uint256_t seed;
     uint256_t state;
+    bool byte = true;
 
     uint256_t mod;
     uint256_t base;
-    uint256_t cmp;
+    uint256_t cmp_byte;
+    uint256_t cmp_bit;
 public:
     void set_seed(uint256_t s);
+    void change_mode();
     uint8_t clock();
 
-    BM_generator(uint256_t s);
+    BM_generator(uint256_t s, bool b);
 };
 
 //0x37682f6947aaab110517c20b76df64781da78b3e87eb58379085d3395793bdb9d9
@@ -115,11 +119,13 @@ class BBS_generator final:public rs_generator{
 private:
     uint512_t seed;
     uint512_t state;
+    bool byte = true;
     
     uint512_t mod;
 public:
     void set_seed(uint512_t s);
+    void change_mode();
     uint8_t clock();
 
-    BBS_generator(uint512_t s);
+    BBS_generator(uint512_t s, bool b);
 };
