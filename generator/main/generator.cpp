@@ -14,7 +14,7 @@ void gen_driver::initialize(string type){
             throw "Unable to parse\n";
         }
 
-        gen = make_unique<lehmer_32>(seed_32_1, false);
+        gen = make_unique<lehmer_32>(seed_32_1, true);
     }
     else if(type == "LE-H"){
         cout << "\nSeed (32-bit number): ";
@@ -22,7 +22,7 @@ void gen_driver::initialize(string type){
             throw "Unable to parse\n";
         }
 
-        gen = make_unique<lehmer_32>(seed_32_1, true);
+        gen = make_unique<lehmer_32>(seed_32_1, false);
     }
     else if(type == "L20"){
         cout << "\nSeed (20-bit number): ";
