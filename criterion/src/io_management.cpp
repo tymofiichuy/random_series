@@ -53,6 +53,7 @@ void criterion::count(){
         throw runtime_error("Unable to read a series");
     }
 
+    bool pair = true;
     uint8_t prev, curr;
     int inter_counter = 0, curr_inter = 0;
     if(!in.read(reinterpret_cast<char*>(&prev), 1)){
@@ -68,12 +69,23 @@ void criterion::count(){
         if(inter_counter >= interval_len){
             inter_counter = 0;
             curr_inter++;
-            // cout << curr_inter << " ";
         }
         unigrams[curr]++;
-        bigrams[prev][curr]++;
+        if(pair){
+            bigrams[prev][curr]++;
+            pair = false;         
+        }
+        else{
+            pair = true;
+        }
         intervals[curr][curr_inter]++;
         n_const++;
         prev = curr;
     }
+
+    // for(int i = 0; i < 256; i++){
+    //     for(int j = 0; j < 256; j++){
+    //         cout << bigrams[i][j] << " ";
+    //     }
+    // }
 }

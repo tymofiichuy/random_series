@@ -45,10 +45,14 @@ void criterion::check_independence(){
 
     for(int i = 0; i < 256; i++){
         for(int j = 0; j < 256; j++){
-            stat += static_cast<float>((bigrams[i][j]*bigrams[i][j]))/(f_i_array[i]*l_i_array[i]);
+            if((f_i_array[i]!=0)&&(l_i_array[i]!=0)){
+                stat += static_cast<float>((bigrams[i][j]*bigrams[i][j]))/(f_i_array[i]*l_i_array[i]);                
+            }
         }
     }
-    stat = (stat-1)*n_const;
+    if(stat!=0){
+        stat = (stat-1)*(n_const/2);        
+    }
     statistics[1] = stat;
 
     cout << "Independence\n   alpha: 0.01\n       limit: " << limits[1][0] << ", statistics: " << stat << ", passed: " << !(stat>limits[1][0]) << "\n";

@@ -11,6 +11,5 @@ int main(int argc, char* argv[]){
     catch(runtime_error err){
         cerr << err.what();
     }
-
     return 0;
 }
